@@ -1,0 +1,32 @@
+{
+  "name": "node-ejabberd-chat",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "dist/main/server.js",
+  "scripts": {
+    "build": "tsup",
+    "node:ts": "node --env-file=.env --import=tsx",
+    "dev": "pnpm node:ts --inspect --watch src/main/server.ts",
+    "start": "node --env-file=.env dist/main/server.js"
+  },
+  "keywords": [],
+  "author": "Matheus Pereira Leal",
+  "license": "ISC",
+  "packageManager": "pnpm@10.9.0",
+  "dependencies": {
+    "@xmpp/client": "^0.13.4"
+  },
+  "devDependencies": {
+    "@types/xmpp__client": "^0.13.3",
+    "tsup": "^8.4.0",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.9.5"
+  },
+  "engines": {
+    "node": "22.14.0"
+  }
+}

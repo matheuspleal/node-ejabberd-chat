@@ -1,0 +1,55 @@
+hosts:
+  - "localhost"
+
+loglevel: 3
+
+listen:
+  - port: 5222
+    module: ejabberd_c2s
+    starttls: true
+    certfile: "/opt/ejabberd/certs/localhost.pem"
+    tls_keyfile: "/opt/ejabberd/certs/localhost.key"
+    tls: true
+    max_stanza_size: 65536
+    shaper: c2s_shaper
+    access: c2s
+
+  - port: 5223
+    module: ejabberd_c2s
+    tls: true
+    certfile: "/opt/ejabberd/certs/localhost.pem"
+    tls_keyfile: "/opt/ejabberd/certs/localhost.key"
+    max_stanza_size: 65536
+    shaper: c2s_shaper
+    access: c2s
+
+  - port: 5280
+    module: ejabberd_http
+    request_handlers:
+      "/admin": ejabberd_web_admin
+
+acl:
+  admin:
+    user:
+      - "admin@localhost"
+  local:
+    user_regexp: ""
+
+access_rules:
+  local:
+    allow: local
+  c2s:
+    allow: all
+  configure:
+    allow: admin
+
+auth_method: internal
+default_db: mnesia
+
+modules:
+  mod_admin_extra: {}
+  mod_mam: {}
+  mod_register:
+    allow_registration: true
+  mod_roster: {}
+  mod_vcard: {}
